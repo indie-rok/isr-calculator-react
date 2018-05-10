@@ -1,18 +1,31 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import isr from "./helpers/isr";
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = { salary: 0, isr: 0 };
+    this.updateIsr = this.updateIsr.bind(this);
+  }
+
+  updateIsr(event) {
+    const salary = parseInt(event.target.value);
+    this.setState({ salary, isr: isr(salary) });
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h6>Salary</h6>
+        <input
+          type="text"
+          value={this.state.salary}
+          onChange={this.updateIsr}
+        />
+
+        <h6>ISR</h6>
+        <input type="text" value={this.state.isr} readOnly />
       </div>
     );
   }
